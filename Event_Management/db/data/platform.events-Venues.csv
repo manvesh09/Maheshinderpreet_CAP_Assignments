@@ -1,0 +1,4 @@
+ID,name,address,city,capacity,type,amenities,hourlyRate,contactPerson,phone,isActive
+11111111-1111-1111-1111-111111111111,Tech Park Hall,MG Road,Bangalore,500,ConferenceHall,"WiFi,Parking,Cafeteria",15000,Priya Sharma,9876543210,true
+22222222-2222-2222-2222-222222222222,Grand Auditorium,Connaught Place,Delhi,1000,Auditorium,"WiFi,AC,Parking",25000,Rahul Verma,9876543211,true
+33333333-3333-3333-3333-333333333333,Virtual Hub,Online,Mumbai,10000,Virtual,"Recording,Streaming",5000,Neha Kapoor,9876543212,true

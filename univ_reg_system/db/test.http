@@ -1,0 +1,54 @@
+### Get all departments
+GET http://localhost:4004/odata/v4/university/Departments
+ 
+ 
+### Get all professors
+GET http://localhost:4004/odata/v4/university/Professors
+ 
+ 
+### Get courses filtered by department and semester
+GET http://localhost:4004/odata/v4/university/Courses?$filter=departmentCode eq 'CSE' and semester eq 3
+ 
+ 
+### Get students with CGPA above 8.0
+GET http://localhost:4004/odata/v4/university/Students?$filter=cgpa gt 8.0
+ 
+ 
+### Get available courses (seats available)
+GET http://localhost:4004/odata/v4/university/Courses?$filter=currentEnrolled lt maxStudents
+ 
+ 
+### Get enrollments for a specific student
+GET http://localhost:4004/odata/v4/university/Enrollments?$filter=studentId eq a7777777-7777-7777-7777-777777777777
+ 
+ 
+### Create new enrollment
+POST http://localhost:4004/odata/v4/university/Enrollments
+Content-Type: application/json
+ 
+{
+    "studentId":"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    "courseCode":"CS101",
+    "enrollmentDate":"2025-06-01",
+    "status":"Enrolled",
+    "attendancePercent":85
+}
+ 
+ 
+### Update grade for enrollment
+PATCH http://localhost:4004/odata/v4/university/Enrollments(studentId=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa,courseCode='CS101')
+Content-Type: application/json
+ 
+{
+    "grade":"A",
+    "gradePoints":10
+}
+ 
+ 
+### Get all exams
+GET http://localhost:4004/odata/v4/university/Exams
+ 
+ 
+### Get all enrollments
+GET http://localhost:4004/odata/v4/university/Enrollments
+ 

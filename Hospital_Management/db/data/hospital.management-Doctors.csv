@@ -1,0 +1,7 @@
+ID,firstName,lastName,specialization,qualification,experience,fee,department_ID,phone,email,availableDays,isActive
+DOC01,Ryan,Reynolds,Neurologist,MD,12,1200,D01,9999900001,ryan@hospital.com,Mon-Fri,true
+DOC02,Megan,Fox,Dermatologist,MD,8,1000,D02,9999900002,megan@hospital.com,Mon-Sat,true
+DOC03,Paul,Wesley,Cardiologist,MD,10,1500,D03,9999900003,paul@hospital.com,Tue-Sat,true
+DOC04,Emma,Stone,Pediatrician,MS,9,1300,D04,9999900004,emma@hospital.com,Mon-Fri,true
+DOC05,Kevin,Hart,Cardiologist,DM,15,1000,D03,9999900005,kevin@hospital.com,Wed-Sun,true
+DOC06,Stephan,King,Neurology,MD,7,1100,D01,9999900006,stephan@hospital.com,Mon-Fri,true

@@ -1,0 +1,6 @@
+ID,name,company,phone,email,address,city,pincode,gstNumber,tier
+33333333-3333-3333-3333-333333333331,Emma Stone,NorthStar Retail,+14085550101,emma@northstar.com,12 Harbor Street,Boston,02108,GST10001,Premium
+33333333-3333-3333-3333-333333333332,Olivia Grant,BluePeak Labs,+14085550102,olivia@bluepeak.com,77 Lake Avenue,Chicago,60601,GST10002,Enterprise
+33333333-3333-3333-3333-333333333333,Ava Miller,Skyline Stores,+14085550103,ava@skyline.com,55 Maple Road,Dallas,75201,GST10003,Regular
+33333333-3333-3333-3333-333333333334,Sophia Turner,WestBridge Trade,+14085550104,sophia@westbridge.com,19 Queen Street,Seattle,98101,GST10004,Premium
+ 

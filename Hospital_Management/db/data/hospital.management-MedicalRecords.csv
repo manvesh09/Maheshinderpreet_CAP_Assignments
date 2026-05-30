@@ -1,0 +1,4 @@
+ID,patient_ID,doctor_ID,appointment_ID,diagnosis,prescription,testRecommended,recordDate
+MR01,P02,DOC02,A02,Allergic Dermatitis,Antihistamine Cream and Tablets,Skin Allergy Test,2025-08-13
+MR02,P04,DOC04,A04,Routine Child Health Checkup,Vitamin Supplements,None,2025-08-15
+MR03,P01,DOC03,A06,Mild Cardiac Arrhythmia,Beta Blockers and Lifestyle Changes,ECG and Echocardiogram,2025-08-18

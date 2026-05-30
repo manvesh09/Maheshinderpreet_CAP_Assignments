@@ -1,0 +1,7 @@
+code,title,description,credits,maxStudents,currentEnrolled,semester,departmentCode,professorId,schedule,roomNumber,isActive
+CS101,Programming Fundamentals,Introduction to Programming Concepts,4,60,45,1,CSE,11111111-1111-1111-1111-111111111111,MWF 10:00-11:00,A101,true
+CS201,Data Structures,Linear and Non Linear Data Structures,4,60,50,3,CSE,44444444-4444-4444-4444-444444444444,MWF 11:00-12:00,A102,true
+CS301,Database Systems,Relational Database Management Systems,4,50,40,5,CSE,11111111-1111-1111-1111-111111111111,TTS 10:00-11:30,A103,true
+EC101,Basic Circuits,Fundamentals of Electronic Circuits,4,50,35,1,ECE,22222222-2222-2222-2222-222222222222,TTS 09:00-10:00,B101,true
+EC201,Digital Electronics,Digital Logic and Circuit Design,4,50,30,3,ECE,55555555-5555-5555-5555-555555555555,TTS 11:00-12:00,B102,true
+MBA101,Management Principles,Introduction to Business Management,3,40,25,1,MBA,33333333-3333-3333-3333-333333333333,MWF 02:00-03:00,C101,true

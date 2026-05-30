@@ -1,0 +1,5 @@
+ID,name,floor,head,capacity,phone,isActive
+D01,Neurology,3,Dr Ryan,40,9999933311,true
+D02,Dermatology,2,Dr Megan,50,9999955555,true
+D03,Cardiology,1,Dr Paul,45,9999911111,true
+D04,Pediatrics,4,Dr Emma,55,9999444222,true

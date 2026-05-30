@@ -1,0 +1,3 @@
+ID,event_ID,attendeeEmail,overallRating,contentRating,venueRating,speakerRating,comment,submittedAt
+99999999-1111-1111-1111-111111111111,aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa,amit@example.com,5,5,4,5,Excellent event,2025-08-12T10:00:00Z
+99999999-2222-2222-2222-222222222222,cccccccc-cccc-cccc-cccc-cccccccccccc,ananya@example.com,4,4,5,4,Very informative seminar,2025-10-06T11:00:00Z

@@ -1,0 +1,57 @@
+### Get published events sorted by start date
+GET http://localhost:4004/odata/v4/event/Events?$filter=status eq 'Published'&$orderby=startDate
+ 
+### Get events filtered by type Workshop
+GET http://localhost:4004/odata/v4/event/Events?$filter=eventType eq 'Workshop'
+ 
+### Get all registrations for AI Summit event
+GET http://localhost:4004/odata/v4/event/Registrations?$filter=event_ID eq aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
+ 
+### Post a new registration
+POST http://localhost:4004/odata/v4/event/Registrations
+Content-Type: application/json
+ 
+{
+  "ID": "bbbb1111-2222-3333-4444-555555555555",
+  "event_ID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  "attendeeName": "Vicky Kaushal",
+  "attendeeEmail": "vicky@example.com",
+  "attendeePhone": "9876543210",
+  "company": "Wipro",
+  "ticketType": "VIP",
+  "registrationDate": "2025-07-15",
+  "status": "Confirmed",
+  "amountPaid": 2000,
+  "paymentId": "PAY999"
+}
+ 
+### Get speakers sorted by rating descending
+GET http://localhost:4004/odata/v4/event/Speakers?$orderby=rating desc
+ 
+### Get events with available seats
+GET http://localhost:4004/odata/v4/event/Events?$filter=registeredCount lt maxAttendees
+ 
+### Update event status from Draft to Published
+PATCH http://localhost:4004/odata/v4/event/Events(bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb)
+Content-Type: application/json
+ 
+{
+  "status": "Published"
+}
+ 
+### Post feedback for an event
+POST http://localhost:4004/odata/v4/event/Feedback
+Content-Type: application/json
+ 
+{
+  "ID": "99999999-9999-9999-9999-999999999999",
+  "event_ID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+  "attendeeEmail": "vicky@example.com",
+  "overallRating": 5,
+  "contentRating": 5,
+  "venueRating": 4,
+  "speakerRating": 5,
+  "comment": "Excellent event",
+  "submittedAt": "2025-08-12T10:00:00Z"
+}
+ 

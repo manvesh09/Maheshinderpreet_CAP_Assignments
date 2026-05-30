@@ -1,0 +1,10 @@
+ID,patient_ID,doctor_ID,appointmentDate,appointmentTime,status,reason,notes,fee
+A01,P01,DOC01,2025-08-12,10:00:00,Scheduled,Migraine Consultation,Frequent headaches for 2 weeks,1200
+A02,P02,DOC02,2025-08-13,11:30:00,Completed,Skin Allergy,Rash on arms and neck,1000
+A03,P03,DOC03,2025-08-14,09:00:00,Scheduled,Heart Checkup,Family history of heart disease,1500
+A04,P04,DOC04,2025-08-15,14:00:00,Completed,Child Vaccination,Routine immunization visit,1300
+A05,P05,DOC05,2025-08-16,16:30:00,Scheduled,Chest Pain Evaluation,Mild chest discomfort during exercise,1000
+A06,P01,DOC03,2025-08-18,15:00:00,Completed,ECG Test,Follow-up after chest discomfort,1500
+A07,P03,DOC02,2025-08-19,10:30:00,Scheduled,Skin Irritation,Allergic reaction suspected,1000
+A08,P05,DOC01,2025-08-20,12:00:00,Cancelled,Neurology Consultation,Patient requested reschedule,1200
+ 

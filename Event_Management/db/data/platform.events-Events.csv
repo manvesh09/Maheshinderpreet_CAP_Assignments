@@ -1,0 +1,5 @@
+ID,title,description,eventType,venue_ID,startDate,endDate,startTime,endTime,maxAttendees,registeredCount,ticketPrice,status,organizerName,organizerEmail,tags
+aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa,AI Summit 2025,Artificial Intelligence Conference,Conference,11111111-1111-1111-1111-111111111111,2025-08-10,2025-08-11,09:00:00,18:00:00,500,250,2000,Published,Amit Sharma,amit@example.com,"AI,ML"
+bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb,Cloud Workshop,Hands-on Cloud Training,Workshop,11111111-1111-1111-1111-111111111111,2025-09-15,2025-09-15,10:00:00,17:00:00,100,70,1000,Draft,Priya Verma,priya@example.com,"Cloud,AWS"
+cccccccc-cccc-cccc-cccc-cccccccccccc,Cyber Security Seminar,Security Awareness Program,Seminar,22222222-2222-2222-2222-222222222222,2025-10-05,2025-10-05,11:00:00,16:00:00,300,150,1500,Published,Rahul Gupta,rahul@example.com,"Security,Cyber"
+dddddddd-dddd-dddd-dddd-dddddddddddd,Developer Meetup,Community Networking Meetup,Meetup,33333333-3333-3333-3333-333333333333,2025-11-20,2025-11-20,18:00:00,21:00:00,200,50,500,Draft,Neha Kapoor,neha@example.com,"Developers,Networking"
