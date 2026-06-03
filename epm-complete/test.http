@@ -1,0 +1,79 @@
+### Products
+GET http://localhost:4004/odata/v4/admin/Products
+ 
+###
+ 
+### Customers
+GET http://localhost:4004/odata/v4/admin/Customers
+ 
+###
+ 
+### Sales Orders
+GET http://localhost:4004/odata/v4/admin/SalesOrders
+ 
+###
+ 
+### Suppliers
+GET http://localhost:4004/odata/v4/admin/Suppliers
+ 
+###
+ 
+### Categories
+GET http://localhost:4004/odata/v4/admin/Categories
+ 
+###
+ 
+### Filter Products
+GET http://localhost:4004/odata/v4/admin/Products?$filter=price gt 100
+ 
+###
+ 
+### Order By Rating
+GET http://localhost:4004/odata/v4/admin/Products?$orderby=rating desc
+ 
+###
+ 
+### Filter Customers
+GET http://localhost:4004/odata/v4/admin/Customers?$filter=creditLimit gt 1000
+ 
+###
+ 
+### Expand Customer in Sales Orders
+GET http://localhost:4004/odata/v4/admin/SalesOrders?$expand=customer
+ 
+###
+ 
+### Expand Supplier and Category in Products
+GET http://localhost:4004/odata/v4/admin/Products?$expand=supplier,category
+ 
+###
+ 
+### Product Catalog Report
+GET http://localhost:4004/odata/v4/report/ProductCatalogReport
+ 
+###
+ 
+### Order Report
+GET http://localhost:4004/odata/v4/report/OrderReportView
+ 
+###
+ 
+### Low Stock Alert
+GET http://localhost:4004/odata/v4/report/LowStockAlertView
+ 
+###
+ 
+### Deep Insert Product
+POST http://localhost:4004/odata/v4/admin/Products
+Content-Type: application/json
+ 
+{
+    "name": "Gaming Laptop",
+    "description": "High Performance Laptop",
+    "price": 1200,
+    "currency_code": "USD",
+    "stock": 20,
+    "minStock": 5,
+    "rating": 4.8
+}
+ 
