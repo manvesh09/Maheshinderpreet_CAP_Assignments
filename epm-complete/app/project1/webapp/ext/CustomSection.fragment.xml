@@ -1,0 +1,42 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+ 
+    <VBox id="summaryBox" class="sapUiSmallMargin">
+ 
+        <ProgressIndicator
+            id="amountProgress"
+            percentValue="{= ${amount} / 1000000 * 100}"
+            displayValue="{= 'Amount: ' + ${amount}}"
+            state="{=
+                ${amount} > 500000 ? 'Success' :
+                ${amount} > 100000 ? 'Warning' :
+                'Error'
+            }"/>
+ 
+        <ObjectStatus
+            id="statusInfo"
+            title="Status"
+            text="{status}"
+            state="{=
+                ${status} === 'Approved' ? 'Success' :
+                ${status} === 'Pending' ? 'Warning' :
+                'Error'
+            }"/>
+ 
+        <Text
+            id="poNumberText"
+            text="{= 'PO Number: ' + ${poNumber}}"/>
+ 
+        <Text
+            id="categoryText"
+            text="{=
+                ${amount} > 500000
+                ? 'High Value Purchase Order'
+                : 'Regular Purchase Order'
+            }"/>
+ 
+    </VBox>
+ 
+</core:FragmentDefinition>
+ 

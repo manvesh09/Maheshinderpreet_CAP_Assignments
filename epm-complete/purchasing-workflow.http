@@ -1,0 +1,128 @@
+@base = http://localhost:4004/purchasing
+ 
+###
+### STEP 1: View Dashboard (unbound function)
+###
+GET {{base}}/getPurchasingDashboard()
+ 
+###
+### STEP 2: Create a Purchase Order (standard CRUD)
+###
+POST {{base}}/PurchaseOrders
+Content-Type: application/json
+ 
+{
+  "poNumber": "PO-2026-001",
+  "supplier_ID": "s1111111-1111-1111-1111-111111111111",
+  "orderDate": "2026-06-02",
+  "expectedDate": "2026-06-15",
+  "status": "Draft",
+  "currency_code": "USD",
+  "notes": "Monthly restock order"
+}
+ 
+###
+### STEP 3: Add items to PO (standard CRUD)
+###
+POST {{base}}/PurchaseOrderItems
+Content-Type: application/json
+ 
+{
+  "purchaseOrder_ID": "PASTE-PO-ID",
+  "product_ID": "PASTE-PRODUCT-ID",
+  "quantity": 100,
+  "unitPrice": 45.00,
+  "currency_code": "USD"
+}
+ 
+###
+### STEP 4: Get PO Summary (bound function)
+###
+GET {{base}}/PurchaseOrders(PASTE-PO-ID)/PurchasingService.getSummary()
+ 
+###
+### STEP 5: Try to submit without items (should fail if no items)
+###
+POST {{base}}/PurchaseOrders(PASTE-PO-ID)/PurchasingService.submit
+Content-Type: application/json
+ 
+{}
+ 
+###
+### STEP 6: Submit PO for approval (bound action)
+###
+POST {{base}}/PurchaseOrders(PASTE-PO-ID)/PurchasingService.submit
+Content-Type: application/json
+ 
+{}
+ 
+###
+### STEP 7: Try to submit again (should fail - not Draft)
+###
+POST {{base}}/PurchaseOrders(PASTE-PO-ID)/PurchasingService.submit
+Content-Type: application/json
+ 
+{}
+ 
+###
+### STEP 8: Approve the PO (bound action)
+###
+POST {{base}}/PurchaseOrders(PASTE-PO-ID)/PurchasingService.approve
+Content-Type: application/json
+ 
+{
+  "comment": "Approved. Budget available for Q2 restock."
+}
+ 
+###
+### STEP 9: Receive goods (bound action - also updates stock!)
+###
+POST {{base}}/PurchaseOrders(PASTE-PO-ID)/PurchasingService.receive
+Content-Type: application/json
+ 
+{
+  "notes": "All items received in good condition"
+}
+ 
+###
+### STEP 10: Verify stock was updated
+###
+GET {{base}}/Products(PASTE-PRODUCT-ID)?$select=productName,stock
+ 
+###
+### BONUS: Test rejection workflow
+###
+ 
+### Create another PO and submit it
+POST {{base}}/PurchaseOrders
+Content-Type: application/json
+ 
+{
+  "poNumber": "PO-2026-002",
+  "supplier_ID": "PASTE-SUPPLIER-ID",
+  "orderDate": "2026-06-02",
+  "status": "Draft",
+  "currency_code": "USD"
+}
+ 
+### (add items, then submit...)
+ 
+### Reject without reason (should fail)
+POST {{base}}/PurchaseOrders(PO-2-ID)/PurchasingService.reject
+Content-Type: application/json
+ 
+{}
+ 
+### Reject with reason
+POST {{base}}/PurchaseOrders(PO-2-ID)/PurchasingService.reject
+Content-Type: application/json
+ 
+{
+  "reason": "Budget exceeded for this quarter. Please reduce quantities and resubmit."
+}
+ 
+###
+### Check dashboard after all operations
+###
+GET {{base}}/getPurchasingDashboard()
+ 

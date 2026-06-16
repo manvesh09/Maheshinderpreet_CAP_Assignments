@@ -6,6 +6,12 @@ using {
     Currency,
     Country
 } from '@sap/cds/common';
+
+type POstatus : String(30) enum {
+    Approved;
+    Pending;
+    Cancelled;
+}
  
 entity Suppliers : cuid {
     name      : String(100);
@@ -71,7 +77,8 @@ entity PurchaseOrders : cuid, managed {
     orderDate  : Date;
     amount     : Decimal(15,2);
     currency   : Currency;
-    status     : String(30);
+    status     : POstatus;
+    statusCriticality: Integer;
  
     items      : Composition of many PurchaseOrderItems
                    on items.order = $self;
@@ -82,5 +89,6 @@ entity PurchaseOrderItems : cuid {
     product    : Association to Products;
     quantity   : Integer;
     unitPrice  : Decimal(15,2);
+    totalPrice : Decimal(15,2);
 }
  

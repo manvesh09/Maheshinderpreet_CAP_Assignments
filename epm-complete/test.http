@@ -76,4 +76,131 @@ Content-Type: application/json
     "minStock": 5,
     "rating": 4.8
 }
+
+
+ 
+@sales = http://localhost:4004/odata/v4/sales
+ 
+### Test 1: Create order without customer (should fail)
+POST {{sales}}/SalesOrders
+Content-Type: application/json
+ 
+{
+  "orderDate": "2026-06-15",
+  "items": [
+    {
+      "product_ID": "p1111111-1111-1111-1111-111111111111",
+      "quantity": 2,
+      "unitPrice": 50.00
+    }
+  ]
+}
+ 
+### Test 2: Create order with past date (should fail)
+POST {{sales}}/SalesOrders
+Content-Type: application/json
+ 
+{
+  "customer_ID": "c1111111-1111-1111-1111-111111111111",
+  "orderDate": "2020-01-01",
+  "items": [
+    {
+      "product_ID": "p1111111-1111-1111-1111-111111111111",
+      "quantity": 2,
+      "unitPrice": 50.00
+    }
+  ]
+}
+ 
+### Test 3: Create order with invalid item (quantity 0)
+POST {{sales}}/SalesOrders
+Content-Type: application/json
+ 
+{
+  "customer_ID": "c1111111-1111-1111-1111-111111111111",
+  "orderDate": "2026-06-15",
+  "items": [
+    {
+      "product_ID": "p1111111-1111-1111-1111-111111111111",
+      "quantity": 0,
+      "unitPrice": 50.00
+    }
+  ]
+}
+ 
+### Test 4: Create valid order (should succeed + auto-calculate totals!)
+POST {{sales}}/SalesOrders
+Content-Type: application/json
+ 
+{
+  "customer_ID": "c1111111-1111-1111-1111-111111111111",
+  "orderNumber": "SO-201",
+  "orderDate": "2026-06-15",
+  "currency_code": "USD",
+  "items": [
+    {
+      "product_ID": "p1111111-1111-1111-1111-111111111111",
+      "quantity": 2,
+      "unitPrice": 499.99
+    },
+    {
+      "product_ID": "p1111111-1111-1111-1111-111111111112",
+      "quantity": 1,
+      "unitPrice": 29.99
+    }
+  ]
+}
+ 
+### Test 5: Try invalid status transition (New → Delivered should fail)
+PATCH {{sales}}/SalesOrders(f6f681f2-f6ab-4fb3-bb8e-6b3f3efbab96)
+Content-Type: application/json
+ 
+{
+  "status": "Delivered"
+}
+ 
+### Test 6: Valid status transition (New → Confirmed)
+PATCH {{sales}}/SalesOrders(f6f681f2-f6ab-4fb3-bb8e-6b3f3efbab96)
+Content-Type: application/json
+ 
+{
+  "status": "Confirmed"
+}
+
+
+###
+### Call unbound action: GenerateReport
+POST http://localhost:4004/analytics/GenerateReport
+Content-Type: application/json
+ 
+{
+    "reportType": "Sales",
+    "startDate": "2026-01-01",
+    "endDate": "2026-05-31"
+}
+
+
+### Confirm a specific order
+POST http://localhost:4004/sales/SalesOrders(859b6407-34be-4229-9c57-d8c96cd90c15)/SalesService.confirm
+Content-Type: application/json
+ 
+{}
+ 
+### Cancel a specific order (with reason parameter)
+POST http://localhost:4004/sales/SalesOrders(859b6407-34be-4229-9c57-d8c96cd90c15)/SalesService.cancel
+Content-Type: application/json
+ 
+{
+    "reason": "Customer changed their mind"
+}
+ 
+### Ship an order (with tracking info)
+POST http://localhost:4004/sales/SalesOrders(859b6407-34be-4229-9c57-d8c96cd90c15)/SalesService.ship
+Content-Type: application/json
+ 
+{
+    "trackingNumber": "TRK-2026-ABC123",
+    "carrier": "FedEx"
+}
+ 
  
