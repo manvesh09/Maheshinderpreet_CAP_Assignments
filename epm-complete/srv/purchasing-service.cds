@@ -1,49 +1,101 @@
 using { com.epm as db } from '../db/schema';
  
-service PurchasingService @(path: '/purchasing') {
-    @odata.draft.enabled
+service PurchasingService @(path: '/purchasing') @(requires: 'authenticated-user') {
  
-    entity PurchaseOrders as projection on db.PurchaseOrders
+    @odata.draft.enabled
+    entity PurchaseOrders @(restrict: [
+ 
+        {
+            grant : 'READ',
+            to    : 'Viewer',
+            where : 'status = ''Approved'' or status = ''Received'''
+        },
+ 
+        {
+            grant : ['READ', 'CREATE', 'UPDATE'],
+            to    : 'PurchaseManager',
+            where : 'createdBy = $user'
+        },
+ 
+        {
+            grant : 'READ',
+            to    : 'PurchaseManager',
+            where : 'status = ''Submitted'''
+        },
+ 
+        {
+            grant : '*',
+            to    : 'Administrator'
+        }
+ 
+    ]) as projection on db.PurchaseOrders
+ 
     actions {
  
-        // Workflow actions
-        action submit() returns { status: String; message: String; };
+        @requires: 'PurchaseManager'
+        action submit()
+            returns {
+                status  : String;
+                message : String;
+            };
  
+        @requires: ['PurchaseManager', 'Administrator']
         action approve(comment: String(500))
-            returns { status: String; message: String; approvedAt: DateTime; };
+            returns {
+                status  : String;
+                message : String;
+            };
  
+        @requires: ['PurchaseManager', 'Administrator']
         action reject(reason: String(500))
-            returns { status: String; message: String; };
+            returns {
+                status  : String;
+                message : String;
+            };
  
-        action receive(receivedQty: Integer,notes: String(500))
-            returns { status: String; message: String; };
+        @requires: 'PurchaseManager'
+        action receive(
+            receivedQty : Integer,
+            notes       : String(500)
+        )
+            returns {
+                status  : String;
+                message : String;
+            };
  
-        // Read-only functions
         function getSummary() returns {
-            poNumber   : String;
-            supplier   : String;
-            itemCount  : Integer;
-            totalAmount: Decimal;
-            status     : String;
-            daysOpen   : Integer;
+            poNumber    : String;
+            supplier    : String;
+            itemCount   : Integer;
+            totalAmount : Decimal;
+            status      : String;
+            daysOpen    : Integer;
         };
+ 
     };
  
-    entity PurchaseOrderItems as projection on db.PurchaseOrderItems;
+    entity PurchaseOrderItems @(restrict: [
+        { grant : 'READ', to : 'Viewer' },
+        { grant : '*', to : ['PurchaseManager', 'Administrator'] }
+    ]) as projection on db.PurchaseOrderItems;
  
-    @readonly entity Suppliers as projection on db.Suppliers;
-    @readonly entity Products  as projection on db.Products;
+    @readonly
+    entity Products as projection on db.Products;
  
-    // Unbound function: Dashboard stats
+    @requires: 'Administrator'
+    entity Suppliers as projection on db.Suppliers;
+ 
+    @requires: 'Administrator'
+    entity Categories as projection on db.Categories;
+ 
     function getPurchasingDashboard() returns {
-        totalPOs       : Integer;
-        draftCount     : Integer;
-        pendingApproval: Integer;
-        approvedCount  : Integer;
-        totalSpend     : Decimal;
+        totalPOs        : Integer;
+        draftCount      : Integer;
+        pendingApproval : Integer;
+        approvedCount   : Integer;
+        totalSpend      : Decimal;
     };
  
-    // Events
     event POSubmitted {
         poId         : UUID;
         poNumber     : String;
@@ -65,5 +117,27 @@ service PurchasingService @(path: '/purchasing') {
         rejectedBy : String;
         reason     : String;
     }
+ 
 }
+ 
+service CatalogService @(path: '/catalog') {
+ 
+    @readonly
+    entity Products as projection on db.Products {
+        ID,
+        name,
+        description,
+        price,
+        stock,
+        rating,
+        category
+    };
+ 
+    @readonly
+    entity Categories as projection on db.Categories;
+ 
+}
+
+    
+
  

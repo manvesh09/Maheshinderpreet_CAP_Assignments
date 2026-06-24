@@ -203,4 +203,80 @@ Content-Type: application/json
     "carrier": "FedEx"
 }
  
+### Viewer can READ
+
+GET http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic dmlld2VyOnZpZXdlcg==
+ 
+### Viewer cannot CREATE
+POST http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic dmlld2VyOnZpZXdlcg==
+Content-Type: application/json
+ 
+{
+  "poNumber": "PO-TEST",
+  "status": "Draft"
+}
+ 
+### Viewer cannot access Suppliers
+GET http://localhost:4004/purchasing/Suppliers
+Authorization: Basic dmlld2VyOnZpZXdlcg==
+ 
+
+### Step 1 - Alice creates PO
+POST http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic YWxpY2U6YWxpY2U=
+Content-Type: application/json
+ 
+{
+  "poNumber": "PO-ALICE-001",
+  "status": "Draft"
+}
+ 
+###
+ 
+### Step 2 - Bob creates PO
+POST http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic Ym9iOmJvYg==
+Content-Type: application/json
+ 
+{
+  "poNumber": "PO-BOB-001",
+  "status": "Draft"
+}
+ 
+###
+ 
+### Step 3 - Alice reads POs
+GET http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic YWxpY2U6YWxpY2U=
+ 
+###
+ 
+### Step 4 - Bob reads POs
+GET http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic Ym9iOmJvYg==
+ 
+###
+ 
+### Step 5 - Admin reads all POs
+GET http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic ZGF2ZTpkYXZl
+ 
+###
+ 
+### Step 6 - Viewer reads approved POs
+GET http://localhost:4004/purchasing/PurchaseOrders
+Authorization: Basic Y2Fyb2w6Y2Fyb2w=
+ 
+###
+ 
+### Step 7 - Alice tries to edit Bob's PO
+PATCH http://localhost:4004/purchasing/PurchaseOrders(bob-po-uuid)
+Authorization: Basic YWxpY2U6YWxpY2U=
+Content-Type: application/json
+ 
+{
+  "priority": "High"
+}
  

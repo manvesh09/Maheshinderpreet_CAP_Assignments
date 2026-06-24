@@ -1,0 +1,18 @@
+{
+  "requires": {
+    "auth": {
+      "kind": "mocked",
+      "users": {
+        "viewer": {
+          "roles": ["Viewer"]
+        },
+        "manager": {
+          "roles": ["PurchaseManager"]
+        },
+        "admin": {
+          "roles": ["Administrator", "PurchaseManager", "Viewer"]
+        }
+      }
+    }
+  }
+}

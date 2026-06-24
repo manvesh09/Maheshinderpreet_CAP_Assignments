@@ -1,0 +1,74 @@
+{
+ "xsappname": "epm-management",
+ "tenant-mode": "dedicated",
+ "scopes": [
+  {
+   "name": "$XSAPPNAME.Read",
+   "description": "Read access"
+  },
+  {
+   "name": "$XSAPPNAME.Create",
+   "description": "Create records"
+  },
+  {
+   "name": "$XSAPPNAME.Approve",
+   "description": "Approve POs"
+  },
+  {
+   "name": "$XSAPPNAME.Delete",
+   "description": "Delete records"
+  },
+  {
+   "name": "$XSAPPNAME.Admin",
+   "description": "Admin access"
+  },
+  {
+   "name": "$XSAPPNAME.Viewer",
+   "description": "Viewer"
+  },
+  {
+   "name": "$XSAPPNAME.PurchaseManager",
+   "description": "PurchaseManager"
+  },
+  {
+   "name": "$XSAPPNAME.Administrator",
+   "description": "Administrator"
+  }
+ ],
+ "attributes": [
+  {
+   "name": "Department",
+   "description": "User department",
+   "valueType": "string"
+  }
+ ],
+ "role-templates": [
+  {
+   "name": "Viewer",
+   "scope-references": [
+    "$XSAPPNAME.Read"
+   ]
+  },
+  {
+   "name": "PurchaseManager",
+   "scope-references": [
+    "$XSAPPNAME.Read",
+    "$XSAPPNAME.Create",
+    "$XSAPPNAME.Approve"
+   ],
+   "attribute-references": [
+    "Department"
+   ]
+  },
+  {
+   "name": "Administrator",
+   "scope-references": [
+    "$XSAPPNAME.Read",
+    "$XSAPPNAME.Create",
+    "$XSAPPNAME.Approve",
+    "$XSAPPNAME.Delete",
+    "$XSAPPNAME.Admin"
+   ]
+  }
+ ]
+}

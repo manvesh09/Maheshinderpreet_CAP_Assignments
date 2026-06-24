@@ -2,10 +2,14 @@
   "name": "epm-complete",
   "version": "1.0.0",
   "dependencies": {
-    "@sap/cds": "^9"
+    "@sap/approuter": "^22.0.3",
+    "@sap/cds": "^9",
+    "@sap/xssec": "^4",
+    "@cap-js/hana": "^2",
+    "express": "^4"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^2.4",
+    "@sap/cds-dk": "^9",
     "cds-plugin-ui5": "^0.17.0"
   },
   "scripts": {
@@ -16,9 +20,51 @@
   "cds": {
     "requires": {
       "db": {
-        "kind": "sqlite",
-        "credentials": {
-          "database": "db/epm.db"
+        "kind": "hana"
+      },
+      "auth": {
+        "[development]": {
+          "kind": "xsuaa",
+          "users": {
+            "alice": {
+              "password": "alice",
+              "roles": [
+                "PurchaseManager"
+              ],
+              "attr": {
+                "Department": "Engineering"
+              }
+            },
+            "bob": {
+              "password": "bob",
+              "roles": [
+                "PurchaseManager"
+              ],
+              "attr": {
+                "Department": "Marketing"
+              }
+            },
+            "carol": {
+              "password": "carol",
+              "roles": [
+                "Viewer"
+              ]
+            },
+            "dave": {
+              "password": "dave",
+              "roles": [
+                "Administrator"
+              ]
+            }
+          }
+        },
+        "[production]": {
+          "auth": "xsuaa"
+        }
+      },
+      "[production]": {
+        "auth": {
+          "kind": "xsuaa"
         }
       }
     }
